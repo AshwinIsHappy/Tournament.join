@@ -14,8 +14,8 @@ import sys
 import requests
 
 TOKEN   = os.environ["TOR"].strip('"')
-TMT_ID  = os.getenv("TMT_ID", "doF1DMaz")
-TEAM_ID = os.getenv("TEAM_ID", "royalracer-fans")
+TMT_ID  = os.getenv("TMT_ID")
+TEAM_ID = os.getenv("TEAM_ID")
 
 URL = f"https://lichess.org/api/tournament/{TMT_ID}/join"   # arena & team-battle endpoint
 
