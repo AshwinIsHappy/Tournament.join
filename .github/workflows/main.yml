@@ -4,13 +4,13 @@ on:
   workflow_dispatch:
     inputs:
       TMT_ID:
-        description: "Tournament ID (e.g. doF1DMaz)"
+        description: "Tournament ID"
         required: true
         default: "doF1DMaz"
       TEAM_ID:
-        description: "Team slug (e.g. royalracer-fans)"
+        description: "Team slug"
         required: true
-        default: "royalracer-fans"
+        default: "mantained-discipline"
 
 jobs:
   join:
