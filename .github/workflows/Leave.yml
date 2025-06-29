@@ -1,0 +1,55 @@
+name: Leave Lichess Tournament
+
+on:
+  workflow_dispatch:
+    inputs:
+      TMT_ID:
+        description: "Tournament ID"
+        required: true
+        default: "doF1DMaz"
+      WHICH_TOR:
+        description: "Which token to use (1-14)"
+        required: true
+        default: "1"
+
+jobs:
+  leave-tournament:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install requests
+        run: pip install --quiet requests
+
+      - name: Set TOR from selected token
+        id: set-token
+        run: |
+          case "${{ github.event.inputs.WHICH_TOR }}" in
+            "1")  echo "TOR=${{ secrets.TOR_1 }}"  >> $GITHUB_ENV ;;
+            "2")  echo "TOR=${{ secrets.TOR_2 }}"  >> $GITHUB_ENV ;;
+            "3")  echo "TOR=${{ secrets.TOR_3 }}"  >> $GITHUB_ENV ;;
+            "4")  echo "TOR=${{ secrets.TOR_4 }}"  >> $GITHUB_ENV ;;
+            "5")  echo "TOR=${{ secrets.TOR_5 }}"  >> $GITHUB_ENV ;;
+            "6")  echo "TOR=${{ secrets.TOR_6 }}"  >> $GITHUB_ENV ;;
+            "7")  echo "TOR=${{ secrets.TOR_7 }}"  >> $GITHUB_ENV ;;
+            "8")  echo "TOR=${{ secrets.TOR_8 }}"  >> $GITHUB_ENV ;;
+            "9")  echo "TOR=${{ secrets.TOR_9 }}"  >> $GITHUB_ENV ;;
+            "10") echo "TOR=${{ secrets.TOR_10 }}" >> $GITHUB_ENV ;;
+            "11") echo "TOR=${{ secrets.TOR_11 }}" >> $GITHUB_ENV ;;
+            "12") echo "TOR=${{ secrets.TOR_12 }}" >> $GITHUB_ENV ;;
+            "13") echo "TOR=${{ secrets.TOR_13 }}" >> $GITHUB_ENV ;;
+            "14") echo "TOR=${{ secrets.TOR_14 }}" >> $GITHUB_ENV ;;
+            *) echo "Invalid token selection"; exit 1 ;;
+          esac
+
+      - name: Leave the tournament
+        env:
+          TOR: ${{ env.TOR }}
+          TMT_ID: ${{ github.event.inputs.TMT_ID }}
+        run: python leave_tournament.py
