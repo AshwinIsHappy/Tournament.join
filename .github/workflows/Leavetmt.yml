@@ -52,4 +52,4 @@ jobs:
         env:
           TOR: ${{ env.TOR }}
           TMT_ID: ${{ github.event.inputs.TMT_ID }}
-        run: python leave_tournament.py
+        run: python Leave_tournament.py
