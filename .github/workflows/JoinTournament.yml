@@ -6,7 +6,7 @@ on:
       TMT_ID:
         description: "Tournament ID"
         required: true
-        default: "doF1DMaz"
+        default: "7174EaXT"
       TEAM_ID:
         description: "Team slug"
         required: true
